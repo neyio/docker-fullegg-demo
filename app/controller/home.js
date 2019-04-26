@@ -8,9 +8,11 @@ class HomeController extends Controller {
       ctx,
       app,
     } = this;
-    const data = require('../../volume/data.json');
+    const local_result = require('../../volume/data.json');
     const mysql_result = await app.mysql.query('SELECT 1+1 AS result');
-    ctx.body = { mysql_result, data };
+    const redis_result = await app.redis.get('helloworld') || 1;
+    app.redis.set('helloworld', parseInt(redis_result) + 1, 'EX', 100);
+    ctx.body = { mysql_result, redis_result, local_result };
   }
 }
 
