@@ -28,6 +28,14 @@ module.exports = appInfo => {
       app: true,
       agent: false,
     },
+    redis: {
+      client: {
+        port: process.env.EGG_REDIS_SERVER_PORT_6379_TCP_PORT || 6379, // Redis port
+        host: process.env.EGG_REDIS_SERVER_PORT_6379_TCP_ADDR || '127.0.0.1', // Redis host
+        password: process.env.EGG_REDIS_SERVER_ENV_PASSWORD || null,
+        db: 0,
+      },
+    },
   };
 
   console.log(process.env.EGG_MYSQL_SERVER_PORT_3306_TCP_ADDR, process.env.EGG_MYSQL_SERVER_PORT_3306_TCP_PORT);
